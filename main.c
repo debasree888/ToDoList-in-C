@@ -13,6 +13,7 @@ todo *start=NULL;
 int main()
 {
     int choice;
+    welcomeUser();
     while(1){
         system("color 3F");
         system("cls");
@@ -40,6 +41,16 @@ int main()
         exit(0);
         }
     }
+}
+
+void welcomeUser(){
+   system("color 4F");
+   printf("\n\n\n\n\n");
+   printf("\t------------------------------------------------------------------------------------------------------\n\n");
+   printf("\t#################################### YOUR TODO LIST APP ##############################################\n\n");
+   printf("\t------------------------------------------------------------------------------------------------------");
+   printf("\n\n\n\t\t*******************************WELCOME*******************************\n\n\n\n\n\n\n\n\n\t");
+   system("pause");
 }
 
 void seeToDo(){
@@ -136,7 +147,7 @@ void fixcount(){
 }
 
 void updateToDo(){
-   system("cls");
+  system("cls");
   todo *temp,*t;
   char k;
   while(1){
@@ -145,10 +156,10 @@ void updateToDo(){
         scanf("%c",&k);
         if(k=='n')
             break;
-       temp=(todo *)calloc(1,sizeof(todo));
        printf("\nADD it..\n");
+       temp=(todo *)calloc(1,sizeof(todo));
        fflush(stdin);
-       gets(t->data);
+       gets(temp->data);
        temp->link=NULL;
        t=start;
       while(t->link!=NULL){
@@ -157,5 +168,6 @@ void updateToDo(){
       t->link=temp;
       fixcount();
 }
+printf("\n\n");
 system("pause");
 }
