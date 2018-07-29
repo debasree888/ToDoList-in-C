@@ -17,9 +17,10 @@ int main()
         system("color 3F");
         system("cls");
         printf("\n1.See Your ToDo List");
-        printf("\n2.Update Your ToDos");
+        printf("\n2.Create Your ToDos");
         printf("\n3.Delete Your ToDos");
-        printf("\n4.Exit");
+        printf("\n4.Update Your ToDos");
+        printf("\n5.Exit");
         printf("\n\nEnter your choice..");
         scanf("%d",&choice);
         switch(choice){
@@ -27,12 +28,15 @@ int main()
           seeToDo();
         break;
       case 2:
-          addToDo();
+          createToDo();
         break;
       case 3:
           delToDo();
         break;
       case 4:
+         updateToDo();
+         break;
+      case 5:
         exit(0);
         }
     }
@@ -40,7 +44,6 @@ int main()
 
 void seeToDo(){
    system("cls");
-   printf("\n");
    todo *temp;
    temp=start;
         if(start==NULL){
@@ -57,9 +60,8 @@ void seeToDo(){
        system("pause");
    }
 
-void addToDo(){
+void createToDo(){
     char k;
-    int i=1;
     todo *t,*temp;
     system("cls");
     while(1){
@@ -75,21 +77,19 @@ void addToDo(){
         printf("\nADD it..\n");
         fflush(stdin);
         gets(t->data);
-        t->count=i;
+        t->count=1;
         start->link=NULL;
-        i++;
        }
        else{
        temp=(todo *)calloc(1,sizeof(todo));
        printf("\nADD it..\n");
        fflush(stdin);
        gets(temp->data);
-       temp->count=i;
        temp->link=NULL;
        t->link=temp;
        t=t->link;
-       i++;
      }
+     fixcount();
     }
    }
 }
@@ -102,23 +102,25 @@ void delToDo(){
   scanf("%d",&d);
   temp1=start;
   temp=start->link;
+  while(1){
   if(temp1->count==d){
     start=start->link;
     free(temp1);
     fixcount();
+    break;
   }
-  else{
     if(temp->count==d){
         temp1->link=temp->link;
         free(temp);
         fixcount();
+        break;
     }
     else{
         temp1=temp;
         temp=temp->link;
     }
-  }
-  system("pause");
+}
+system("pause");
 }
 
 void fixcount(){
@@ -133,3 +135,27 @@ void fixcount(){
 
 }
 
+void updateToDo(){
+   system("cls");
+  todo *temp,*t;
+  char k;
+  while(1){
+        printf("\nWant to add?y/n");
+        fflush(stdin);
+        scanf("%c",&k);
+        if(k=='n')
+            break;
+       temp=(todo *)calloc(1,sizeof(todo));
+       printf("\nADD it..\n");
+       fflush(stdin);
+       gets(t->data);
+       temp->link=NULL;
+       t=start;
+      while(t->link!=NULL){
+        t=t->link;
+      }
+      t->link=temp;
+      fixcount();
+}
+system("pause");
+}
